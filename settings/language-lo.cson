@@ -1,0 +1,5 @@
+'.source.lo':
+  'editor':
+    'commentStart': '--( |\t)'
+    'increaseIndentPattern': '(:-|-->|=>)\\s*(-- .*)?$'
+    
