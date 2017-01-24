@@ -3,7 +3,7 @@
   'lo'
 ]
 'firstLineMatch': '(\\w+)(\\.\w+)*\{'
-'name': 'LandO'
+'name': 'L&O'
 
 'patterns': [
   {
@@ -20,6 +20,7 @@
     'end': '"'
     'contentName': 'string.quoted.double.lo'
     'patterns': [
+      'include' : '#escaped-char'
       {
         'begin':'\\\\\\('
         'end':'\\)'
@@ -28,9 +29,6 @@
           { 'include':'$self' }
         ]
       }
-      {
-        'include' : '#escaped-char'
-      }
     ]
   }
   {
@@ -38,9 +36,7 @@
     'end': '\''
     'contentName': 'string.quoted.single.lo'
     'patterns': [
-      {
         'include' : '#escaped-char'
-      }
     ]
   }
   {
@@ -48,9 +44,7 @@
     'end': '\`'
     'contentName': 'regexp.lo'
     'patterns': [
-      {
         'include' : '#escaped-char'
-      }
     ]
   }
   {
@@ -83,11 +77,9 @@
   }
   {
     'repository' : [
-      { 'escaped-char' : {
-          'name' : 'constant.character.escape'
-          'matches' : '\\\\(a|b|t|n|r|u[0-9a-zA-F]+;|[^(])'
-        }
-      }
+      'escaped-char' :
+        'name' : 'constant.character.escape'
+        'matches' : '\\\\(a|b|t|n|r|u[0-9a-zA-F]+;|.)'
     ]
   }
 ]
