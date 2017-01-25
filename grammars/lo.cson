@@ -16,24 +16,24 @@
     'name':'comment.line.double-dash.lo'
   }
   {
-    'begin': '"'
-    'end': '[^\\\\]?"'
     'name': 'string.quoted.double.lo'
+    'begin': '"'
+    'beginCaptures':
+  	  '0':
+    		'name': 'punctuation.definition.string.begin.lo'
+  	'end': '"'
+  	'endCaptures':
+  	  '0':
+    		'name': 'punctuation.definition.string.end.lo'
     'patterns': [
-      { 'include' : '#escaped-char'}
       {
-        'begin':'\\\\\\('
-        'end':'\\)'
-        'name':'string.interpolated.lo'
-        'patterns' : [
-          { 'include':'$self' }
-        ]
+        'include':'#quoted'
       }
     ]
   }
   {
-    'begin': '\''
-    'end': '[^\\\\]?\''
+    'begin': "'"
+    'end': "'"
     'contentName': 'string.quoted.single.lo'
     'patterns': [
         'include' : '#escaped-char'
@@ -41,7 +41,7 @@
   }
   {
     'begin': '\`'
-    'end': '[^\\\\]?\`'
+    'end': '\`'
     'contentName': 'regexp.lo'
     'patterns': [
         'include' : '#escaped-char'
@@ -75,11 +75,37 @@
     'match': '\\b[a-zA-Z_][a-zA-Z0-9_]*\\b'
     'name': 'variable.language.lo'
   }
-  {
-    'repository' : [
-      'escaped-char' :
-        'name' : 'constant.character.escape'
-        'matches' : '\\\\([^u\(]|u[0-9a-zA-F]+;)'
-    ]
-  }
 ]
+'repository' :
+  'quoted':
+    'patterns':[
+      {
+        'name' : 'embedded.line.lo'
+        'contentName':'source.lo'
+        'begin':'\\\\\\('
+        'end':'\\)'
+        'beginCaptures':
+          '0':
+            'name': 'punctuation.section.embedded.begin.lo'
+        'endCaptures':
+          '0':
+            'name': 'punctuation.section.embedded.end.lo'
+        'patterns' : [
+          { 'include':'$self' }
+        ]
+      }
+      {
+        'include' : '#escaped-char'
+      }
+    ]
+  'escaped-char' :
+    'patterns':[
+      {
+        'name':'constant.character.escape.lo'
+        'match':'\\\\[\\\\tnr"\']'
+      }
+      {
+        'match':'\\\\u[0-9a-zA-F]+;'
+        'name':'constant.character.escape.lo'
+      }
+    ]
