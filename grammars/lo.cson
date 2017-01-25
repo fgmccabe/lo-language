@@ -17,10 +17,10 @@
   }
   {
     'begin': '"'
-    'end': '"'
-    'contentName': 'string.quoted.double.lo'
+    'end': '[^\\\\]?"'
+    'name': 'string.quoted.double.lo'
     'patterns': [
-      'include' : '#escaped-char'
+      { 'include' : '#escaped-char'}
       {
         'begin':'\\\\\\('
         'end':'\\)'
@@ -33,7 +33,7 @@
   }
   {
     'begin': '\''
-    'end': '\''
+    'end': '[^\\\\]?\''
     'contentName': 'string.quoted.single.lo'
     'patterns': [
         'include' : '#escaped-char'
@@ -41,7 +41,7 @@
   }
   {
     'begin': '\`'
-    'end': '\`'
+    'end': '[^\\\\]?\`'
     'contentName': 'regexp.lo'
     'patterns': [
         'include' : '#escaped-char'
@@ -79,7 +79,7 @@
     'repository' : [
       'escaped-char' :
         'name' : 'constant.character.escape'
-        'matches' : '\\\\(a|b|t|n|r|u[0-9a-zA-F]+;|.)'
+        'matches' : '\\\\([^u\(]|u[0-9a-zA-F]+;)'
     ]
   }
 ]
