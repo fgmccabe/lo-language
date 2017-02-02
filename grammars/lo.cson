@@ -64,7 +64,7 @@
     'name':'support.operator.lo'
   }
   {
-    'match': "((0c(\\\\u[0-9a-fA-F]+;|\\\\.|.))|(\\d+(\\.\\d+([eE][-+]?\\d+)?)?)|(0x[0-9a-zA-F]*))"
+    'match': "((0c(\\\\u[0-9a-fA-F]+;|\\\\.|.))|(0x[0-9a-zA-F]+)|(\\d+(\\.\\d+([eE][-+]?\\d+)?)?))"
     'name': 'constant.numeric.lo'
   }
   {
